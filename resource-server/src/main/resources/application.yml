@@ -1,0 +1,19 @@
+server:
+  port: 8083
+  context-path: /api
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8081/oauth/token_key
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1P1tnrMJEMwia/4mP5hB
+          plsA4+iQxZXpzDkVraPL7aEjJHJDOCZqaYZ9QxS/UWNU3GPEEnD4QRKEx9/HKaAs
+          5i6htr6duio1s4OvxJXQyhCU0wGL14o8SWz8tfYLhwEnuVLBQvr1rOl/y3X2dj33
+          O/3HCSOiVpY/BR7l7nHcELgyogmBYpKuJhgKiR3b7PDGJrpIGHo+gT92PbZaQTfO
+          +bCTfGQDJzjZWVZJQjk/v5HsI68S5yKcTVCUJfFWPStBXWIMDLZUK7RN4Tz9Jwmf
+          eYHk3+2NheRDSu3xdODhITzgT1Hxzbe5k+xVcdVutqdMKYziVHmEdYoikEO8WolP
+          fQIDAQAB
+          -----END PUBLIC KEY-----
