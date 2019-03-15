@@ -1,5 +1,6 @@
 package com.mkh.authserver.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -24,10 +27,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER").roles("USER");
-        auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN").roles("ADMIN");
+        System.out.println("pass = "+this.passwordEncoder().encode("admin"));
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+                .authoritiesByUsernameQuery("select username, authority from authorities where username=?")
+                .passwordEncoder(this.passwordEncoder());
+//        auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER").roles("USER");
+//        auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN").roles("ADMIN");
     }
 
     @Override

@@ -13,6 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -25,17 +27,29 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("client").secret("secret")
-                .authorizedGrantTypes("authorization_code")
-                .accessTokenValiditySeconds(20000)
-                .refreshTokenValiditySeconds(20000)
-                .scopes("read")
-                .redirectUris("http://localhost:8082/client");
-    }
+        clients.jdbc(dataSource);
 
+//        clients.inMemory()
+//                .withClient("client").secret("secret")
+//                .authorizedGrantTypes("authorization_code")
+//                .accessTokenValiditySeconds(20000)
+//                .refreshTokenValiditySeconds(20000)
+//                .scopes("read")
+//                .redirectUris("http://localhost:8082/client")
+//
+//                .and().
+//
+//                withClient("client_credential").secret("secret")
+//                .authorizedGrantTypes("client_credentials","password")
+//                .accessTokenValiditySeconds(20000)
+//                .refreshTokenValiditySeconds(20000)
+//                .scopes("read");
+    }
 
 
     /** jwt token config **/
