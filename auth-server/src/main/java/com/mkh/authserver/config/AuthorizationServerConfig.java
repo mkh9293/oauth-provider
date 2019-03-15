@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -16,7 +15,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Value("${config.oauth2.privateKey}")
     private String privateKey;
@@ -31,7 +29,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("client").secret("secret")
-                .authorizedGrantTypes("authorization_code", "refresh_token","password")
+                .authorizedGrantTypes("authorization_code")
                 .accessTokenValiditySeconds(20000)
                 .refreshTokenValiditySeconds(20000)
                 .scopes("read")
@@ -69,9 +67,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauth) throws Exception {
-//        oauth.tokenKeyAccess("isAnonymous() || hasRole('ROLE_TRUSTED_CLIENT')") // permitAll()
-//                .checkTokenAccess("hasRole('TRUSTED_CLIENT')"); // isAuthenticated()
-        oauth.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
+        oauth.tokenKeyAccess("isAnonymous() || hasRole('ROLE_TRUSTED_CLIENT')") // permitAll()
+                .checkTokenAccess("hasRole('TRUSTED_CLIENT')"); // isAuthenticated()
+//        oauth.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
 
     /** jwt token config **/

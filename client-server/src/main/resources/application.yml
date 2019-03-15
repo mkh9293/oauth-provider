@@ -3,12 +3,6 @@ server:
   context-path: /client
 
 security:
-  oauth2:
-    client:
-      access-token-uri: http://localhost:8081/oauth/token
-      user-authorization-uri: http://localhost:8081/oauth/authorize
-    resource:
-      user-info-uri: http://localhost:8083/api
   basic:
     enabled: false
 
