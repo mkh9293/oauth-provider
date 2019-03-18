@@ -1,5 +1,6 @@
 package com.mkh.authserver.config;
 
+import com.mkh.authserver.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -30,13 +32,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("pass = "+this.passwordEncoder().encode("admin"));
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery("select username, authority from authorities where username=?")
-                .passwordEncoder(this.passwordEncoder());
+        auth.userDetailsService(userDetailsService);
+//        System.out.println("pass = "+this.passwordEncoder().encode("admin"));
+//        auth.jdbcAuthentication().dataSource(dataSource)
+//                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+//                .authoritiesByUsernameQuery("select username, authority from authorities where username=?")
+//                .passwordEncoder(this.passwordEncoder());
+
 //        auth.inMemoryAuthentication().withUser("user").password("user").authorities("USER").roles("USER");
 //        auth.inMemoryAuthentication().withUser("admin").password("admin").authorities("ADMIN").roles("ADMIN");
     }

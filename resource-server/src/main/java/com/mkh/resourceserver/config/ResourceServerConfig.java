@@ -51,7 +51,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         resources
-                .tokenServices(tokenServices())
+//                .tokenServices(tokenServices())
                 .tokenStore(tokenStore());
     }
 
