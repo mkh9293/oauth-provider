@@ -36,6 +36,6 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
         System.out.println("ttttt");
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), "{noop}"+user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 }

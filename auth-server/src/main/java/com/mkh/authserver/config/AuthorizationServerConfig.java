@@ -74,25 +74,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         return new JwtTokenStore(tokenConverter());
     }
 
-//    @Bean
-//    public DefaultTokenServices defaultTokenServices() {
-//        final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-//        defaultTokenServices.setTokenStore(tokenStore());
-//        // defaultTokenServices.setClientDetailsService(clientDetailsService);
-//        defaultTokenServices.setTokenEnhancer(tokenConverter());
-//        defaultTokenServices.setSupportRefreshToken(true);
-//        return defaultTokenServices;
-//    }
-
-//    @Bean
-//    @Primary
-//    public DefaultTokenServices tokenServices() {
-//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-//        defaultTokenServices.setTokenStore(tokenStore());
-//        defaultTokenServices.setSupportRefreshToken(true);
-//        defaultTokenServices.setTokenEnhancer(tokenConverter());
-//        return defaultTokenServices;
-//    }
 
     /**
      * 1 - 필수 확인 (tokenStore)
@@ -100,7 +81,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
-//                .tokenServices(tokenServices())
                 .tokenStore(tokenStore())
                 .accessTokenConverter(tokenConverter())
                 .userDetailsService(userDetailsService);
