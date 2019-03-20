@@ -9,4 +9,9 @@ public class HomeController {
     public String implicit() {
         return "implicit";
     }
+
+    @GetMapping("/authorization")
+    public String authorization() {
+        return "authorization";
+    }
 }

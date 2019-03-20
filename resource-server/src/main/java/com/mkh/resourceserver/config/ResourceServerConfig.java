@@ -38,15 +38,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         return converter;
     }
 
-    @Bean
-    @Primary
-    public DefaultTokenServices tokenServices() {
-        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
-        return defaultTokenServices;
-    }
+//    @Bean
+//    @Primary
+//    public DefaultTokenServices tokenServices() {
+//        DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
+//        defaultTokenServices.setTokenStore(tokenStore());
+//        defaultTokenServices.setSupportRefreshToken(true);
+//        defaultTokenServices.setTokenEnhancer(accessTokenConverter());
+//        return defaultTokenServices;
+//    }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
