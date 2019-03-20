@@ -10,8 +10,15 @@ public class HomeController {
         return "implicit";
     }
 
+    @GetMapping("/implicitDone")
+    public String implicitDone() {
+        return "implicitDone";
+    }
+
     @GetMapping("/authorization")
     public String authorization() {
         return "authorization";
     }
+
+
 }
