@@ -1,6 +1,5 @@
 package com.mkh.authserver.config;
 
-import com.mkh.authserver.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

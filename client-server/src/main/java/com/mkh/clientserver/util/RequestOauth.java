@@ -10,6 +10,7 @@ import java.util.Base64;
 
 public final class RequestOauth {
     public static String requestOauth(String...args) {
+
         final String AUTH_HOST = "http://localhost:8081";
         final String tokenRequestUrl = AUTH_HOST + "/oauth/token";
 
