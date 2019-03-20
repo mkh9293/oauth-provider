@@ -30,8 +30,10 @@ public final class RequestOauth {
                 params = String.format("grant_type=authorization_code&code=%s&redirect_uri=%s", args[1], REDIRECT_URI);
             } else if (grantType.equals("password")) {
                 params = String.format("grant_type=password&username=%s&password=%s" ,args[1], args[2]);
-            } else {
+            } else if (grantType.equals("client_credentials")){
                 params = String.format("grant_type=client_credentials");
+            } else {
+                params = String.format("grant_type=refresh_token&refresh_token=%s", args[1]);
             }
 
             final URL url = new URL(tokenRequestUrl);

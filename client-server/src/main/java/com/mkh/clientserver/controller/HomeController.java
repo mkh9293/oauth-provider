@@ -25,4 +25,9 @@ public class HomeController {
         return "password";
     }
 
+    @GetMapping("/refresh")
+    public String refresh() {
+        return "refresh";
+    }
+
 }

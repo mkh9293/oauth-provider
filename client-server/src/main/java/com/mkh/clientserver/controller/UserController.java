@@ -4,6 +4,7 @@ import com.mkh.clientserver.util.RequestOauth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +28,14 @@ public class UserController {
         return RequestOauth.requestOauth("client_credentials");
     }
 
-    @RequestMapping("/passwordGrant")
+    @PostMapping("/passwordGrant")
     public String passwordGrant(@RequestParam String name, @RequestParam String pass) {
         return RequestOauth.requestOauth("password", name, pass);
+    }
+
+    @PostMapping("/refreshToken")
+    public String refreshToken(@RequestParam String token) {
+        return RequestOauth.requestOauth("refreshToken", token);
     }
 
 }
