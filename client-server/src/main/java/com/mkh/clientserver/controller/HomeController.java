@@ -20,5 +20,9 @@ public class HomeController {
         return "authorization";
     }
 
+    @GetMapping("/password")
+    public String password() {
+        return "password";
+    }
 
 }

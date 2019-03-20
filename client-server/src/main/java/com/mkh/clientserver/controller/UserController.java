@@ -27,8 +27,8 @@ public class UserController {
         return RequestOauth.requestOauth("client_credentials");
     }
 
-    @RequestMapping("/password")
-    public String credentials(@RequestParam String name, @RequestParam String pass) {
+    @RequestMapping("/passwordGrant")
+    public String passwordGrant(@RequestParam String name, @RequestParam String pass) {
         return RequestOauth.requestOauth("password", name, pass);
     }
 
