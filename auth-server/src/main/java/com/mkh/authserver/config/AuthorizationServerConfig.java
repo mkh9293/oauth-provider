@@ -29,10 +29,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private DataSource dataSource;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private DataSource dataSource;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
@@ -69,26 +69,28 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public JwtTokenStore tokenStore() {
         return new JwtTokenStore(tokenConverter());
     }
+//
 
-
-    /**
-     * 1 - 필수 확인 (tokenStore)
-     */
+//    /**
+//     * 1 - 필수 확인 (tokenStore)
+//     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+//        endpoints.tokenStore(new InMemoryTokenStore()).authen;
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore())
-                .accessTokenConverter(tokenConverter())
-                .userDetailsService(userDetailsService);
+                .accessTokenConverter(tokenConverter()) // /check_token 에서 사용됨
+                .userDetailsService(userDetailsService)
+                .tokenEnhancer(tokenConverter());  // resource server에서 사용됨
     }
-
-    /**
-     * 2 - 필수 확인
-     */
+//
+//    /**
+//     * 2 - 필수 확인
+//     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauth) throws Exception {
-        oauth.tokenKeyAccess("isAnonymous() || hasRole('ROLE_TRUSTED_CLIENT')") // permitAll()
-                .checkTokenAccess("hasRole('TRUSTED_CLIENT')"); // isAuthenticated()
+        oauth.tokenKeyAccess("isAnonymous() || hasRole('ROLE_USER')") // permitAll()
+                .checkTokenAccess("hasRole('ROLE_USER')"); // isAuthenticated()
 //        oauth.tokenKeyAccess("permitAll()").checkTokenAccess("isAuthenticated()");
     }
 
