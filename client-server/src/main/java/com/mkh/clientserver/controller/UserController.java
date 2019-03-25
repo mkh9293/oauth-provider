@@ -1,9 +1,7 @@
 package com.mkh.clientserver.controller;
 
 import com.mkh.clientserver.util.RequestOauth;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,10 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Value("${config.oauth2.resourceUri}")
     private String resourceUri;
-
-    @Autowired
-    private OAuth2RestOperations restTemplate;
-
 
     @RequestMapping("/")
     public String home(@RequestParam String code){

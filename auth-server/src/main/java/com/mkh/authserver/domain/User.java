@@ -3,8 +3,6 @@ package com.mkh.authserver.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.sql.Blob;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
