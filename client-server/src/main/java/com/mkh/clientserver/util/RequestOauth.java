@@ -10,11 +10,9 @@ import java.util.Base64;
 
 public final class RequestOauth {
     public static String requestOauth(String...args) {
-
-        final String AUTH_HOST = "http://localhost:8081";
+        final String AUTH_HOST = "http://172.30.3.107:8081";
         final String tokenRequestUrl = AUTH_HOST + "/oauth/token";
-
-        String REDIRECT_URI = "http://localhost:8082/client/"; // 해당 앱의 설정된 uri. 개발자 웹사이트의 대쉬보드에서 확인 및 설정 가능
+        String REDIRECT_URI = "http://172.30.3.107:8082/client/"; // 해당 앱의 설정된 uri. 개발자 웹사이트의 대쉬보드에서 확인 및 설정 가능
 
         HttpURLConnection conn = null;
         OutputStreamWriter writer = null;
@@ -48,9 +46,6 @@ public final class RequestOauth {
             writer.flush();
 
             final int responseCode = conn.getResponseCode();
-            System.out.println("\nSending 'POST' request to URL : " + tokenRequestUrl);
-            System.out.println("Post parameters : " + params);
-            System.out.println("Response Code : " + responseCode);
 
             isr = new InputStreamReader(conn.getInputStream());
             reader = new BufferedReader(isr);

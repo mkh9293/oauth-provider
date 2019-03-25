@@ -11,7 +11,14 @@ import java.security.Principal;
 public class UserController {
 
     @RequestMapping("/")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public Principal getPrincipal(Principal principal) {
+        return principal;
+    }
+
+    @RequestMapping("/resource1")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public Principal getResource(Principal principal) {
         return principal;
     }
 

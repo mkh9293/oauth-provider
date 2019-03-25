@@ -31,26 +31,33 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Value("${config.oauth2.publicKey}")
     private String publicKey;
 
-//    @Bean
-//    public TokenStore tokenStore() {
-//        return new JwtTokenStore(accessTokenConverter());
-//    }
-
-//    @Bean
 //    public JwtAccessTokenConverter accessTokenConverter() {
 //        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 ////        converter.setSigningKey(privateKey);
 //        converter.setVerifierKey(publicKey);
 //        return converter;
 //    }
+//
+//    public TokenStore tokenStore() {
+//        return new JwtTokenStore(accessTokenConverter());
+//    }
+//
+//    @Override
+//    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+//        resources.tokenStore(tokenStore());
+//    }
+
 
 //    @Autowired
 //    private DataSource dataSource;
-
+//
 //    @Bean
 //    public TokenStore tokenStore(){
 //        return new JdbcTokenStore(dataSource);
 //    }
+
+
+
 
 //    @Override
 //    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

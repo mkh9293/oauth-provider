@@ -11,6 +11,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -57,6 +59,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 
     /** jwt token config **/
+
+//    @Bean
+//    public TokenStore tokenStore() {
+//        return new JdbcTokenStore(dataSource);
+//    }
+
+//    @Override
+//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+//        endpoints.authenticationManager(authenticationManager)
+//                .tokenStore(tokenStore());
+//    }
+
     @Bean
     public JwtAccessTokenConverter tokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
@@ -69,20 +83,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public JwtTokenStore tokenStore() {
         return new JwtTokenStore(tokenConverter());
     }
-//
 
-//    /**
-//     * 1 - 필수 확인 (tokenStore)
-//     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-//        endpoints.tokenStore(new InMemoryTokenStore()).authen;
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(tokenStore())
                 .accessTokenConverter(tokenConverter()) // /check_token 에서 사용됨
-                .userDetailsService(userDetailsService)
+//                .userDetailsService(userDetailsService)
                 .tokenEnhancer(tokenConverter());  // resource server에서 사용됨
     }
+
 //
 //    /**
 //     * 2 - 필수 확인
