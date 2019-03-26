@@ -12,12 +12,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${config.oauth2.privateKey}")
-    private String privateKey;
-
-    @Value("${config.oauth2.publicKey}")
-    private String publicKey;
-
     @Override
     public void configure(HttpSecurity security) throws Exception {
         security.formLogin().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
