@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER')")
+@PreAuthorize("hasAnyRole('USER','ADMIN')")
 public class UserController {
 
     @RequestMapping("/")
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('USER')")
     public Principal getPrincipal(Principal principal) {
         return principal;
     }
 
     @RequestMapping("/resource1")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public Principal getResource(Principal principal) {
         return principal;
     }
