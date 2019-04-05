@@ -9,4 +9,9 @@ public class MainController {
     public String setting() {
         return "setting";
     }
+
+    @GetMapping("/registerForm")
+    public String registerForm() {
+        return "registerForm";
+    }
 }
