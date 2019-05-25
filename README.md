@@ -31,3 +31,4 @@ jwt (json web token), jks(java key store) 이용
 ### 참고
 1. https://tools.ietf.org/html/rfc6749
 2. https://projects.spring.io/spring-security-oauth/docs/oauth2.html
+3. https://github.com/spring-projects/spring-security-oauth/blob/master/spring-security-oauth2/src/test/resources/schema.sql
