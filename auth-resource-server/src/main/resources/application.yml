@@ -3,8 +3,11 @@ security:
     client:
       client-id: client
       client-secret: secret
+      grant-type: client_credentials
+      access-token-uri: http://localhost:8080/oauth/access_token
     resource:
       token-info-uri: http://localhost:8080/oauth/check_token
+
 
 
 spring:
